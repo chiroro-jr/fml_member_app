@@ -74,7 +74,6 @@ function UpdateForm({ title, member }) {
 
         setIsSubmitting(true)
         memberService.updateMember(id, data).then((updatedMember) => {
-            console.log(updatedMember)
             setIsSubmitting(false)
         })
     }
@@ -119,7 +118,7 @@ function UpdateForm({ title, member }) {
                                 <InputText
                                     id="first_name"
                                     name="first_name"
-                                    value={formik.values.first_name}
+                                    value={formik.values.first_name || ''}
                                     onChange={formik.handleChange}
                                     type="text"
                                     className="w-full mb-3"
@@ -135,7 +134,7 @@ function UpdateForm({ title, member }) {
                                 <InputText
                                     id="last_name"
                                     name="last_name"
-                                    value={formik.values.last_name}
+                                    value={formik.values.last_name || ''}
                                     onChange={formik.handleChange}
                                     type="text"
                                     className="w-full mb-3"
@@ -186,7 +185,7 @@ function UpdateForm({ title, member }) {
                         <InputText
                             id="address_line1"
                             name="address_line1"
-                            value={formik.values.address_line1}
+                            value={formik.values.address_line1 || ''}
                             onChange={formik.handleChange}
                             type="text"
                             className="w-full mb-3"
@@ -202,7 +201,7 @@ function UpdateForm({ title, member }) {
                                 <InputText
                                     id="msisdn"
                                     name="msisdn"
-                                    value={formik.values.msisdn}
+                                    value={formik.values.msisdn || ''}
                                     onChange={formik.handleChange}
                                     type="text"
                                     className="w-full mb-3"
@@ -218,7 +217,7 @@ function UpdateForm({ title, member }) {
                                 <InputText
                                     id="national_id"
                                     name="national_id"
-                                    value={formik.values.national_id}
+                                    value={formik.values.national_id || ''}
                                     onChange={formik.handleChange}
                                     type="text"
                                     className="w-full mb-3"
@@ -254,7 +253,7 @@ function UpdateForm({ title, member }) {
                                 <InputText
                                     id="member_number"
                                     name="member_number"
-                                    value={formik.values.member_number}
+                                    value={formik.values.member_number || ''}
                                     onChange={formik.handleChange}
                                     type="text"
                                     className="w-full mb-3"
@@ -270,7 +269,7 @@ function UpdateForm({ title, member }) {
                                 <InputText
                                     id="product_name"
                                     name="product_name"
-                                    value={formik.values.product_name}
+                                    value={formik.values.product_name || ''}
                                     onChange={formik.handleChange}
                                     type="text"
                                     className="w-full mb-3"
