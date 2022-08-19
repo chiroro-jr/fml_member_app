@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    background-color: #add;
+    background-color: #fbf1f1;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica,
         Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
     font-weight: normal;
@@ -217,7 +217,9 @@ img.flag {
 
 .nav {
     margin-bottom: 4rem;
-    background-color: #14b8a6;
+    background-image: linear-gradient(to right, #eb1c23 20%, black 80%);
+    /* background-color: #14b8a6; */
+    background-color: white;
     position: fixed;
     left: 0;
     top: 0;
@@ -225,22 +227,32 @@ img.flag {
     z-index: 10000;
 }
 
+.nav__blur-outer {
+    height: 100%;
+    background-color: hsla(0, 0%, 100%, 0.2);
+}
+
+.nav__blur-inner {
+    height: 100%;
+    backdrop-filter: blur(100px);
+}
+
 .nav__container {
-    padding-top: 1rem;
+    /* padding-top: 1rem;
     padding-bottom: 1rem;
-    padding-left: 3rem;
+    padding-left: 3rem; */
     padding-right: 3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.nav__logo {
+/* .nav__logo {
     margin: 0;
     font-weight: 600;
     font-size: 2rem;
     color: white;
-}
+} */
 
 .nav__links {
     display: flex;
@@ -259,9 +271,20 @@ img.flag {
     transition: 0.3s;
 }
 
-.nav__link:hover {
+.nav__link.active {
     background-color: white;
-    color: #14b8a6;
+    color: black;
+}
+
+.nav__link:hover {
+    background-color: #fbf1f157;
+    transform: translateY(-2px);
+}
+
+.nav__link.active:hover {
+    color: #eb1c23;
+    background-color: white;
+    transform: translateY(-2px);
 }
 
 .new-member,
@@ -269,16 +292,24 @@ img.flag {
     margin-top: 6rem;
 }
 
-.download_btn_wrapper {
-}
-
 .download_btn {
     padding: 0.8em 2em;
     text-decoration: none;
     color: white;
-    background-color: #14b8a6;
+    background-color: #d32f2f;
     font-weight: 500;
     font-size: 1rem;
     border-radius: 0.6em;
     transition: 0.3s;
+}
+
+.logo {
+    height: 100%;
+    background-color: white;
+}
+
+.logo__img {
+    object-fit: cover;
+    display: block;
+    width: 100%;
 }
