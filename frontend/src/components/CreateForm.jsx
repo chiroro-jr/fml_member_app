@@ -357,7 +357,7 @@ function CreateForm({ title }) {
                                 isSubmitting ? 'Adding member...' : 'Add member'
                             }
                             icon="pi pi-user"
-                            className="w-full"
+                            className="w-full p-button-danger"
                         />
                     </div>
                 </div>
