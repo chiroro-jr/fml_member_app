@@ -82,7 +82,9 @@ function DataTableCustom() {
         return (
             <Button
                 type="button"
+                label="View/Edit"
                 icon="pi pi-cog"
+                className="p-button-danger"
                 onClick={() => navigate(`/members/${rowData.id}`)}
             ></Button>
         )
@@ -121,6 +123,8 @@ function DataTableCustom() {
             <Card>
                 <DataTable
                     value={members}
+                    scrollable
+                    scrollHeight="450px"
                     paginator
                     className="p-datatable-customers"
                     header={header}
