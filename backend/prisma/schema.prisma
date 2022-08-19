@@ -1,0 +1,261 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model hibernate_sequence {
+  next_val BigInt?
+
+  @@ignore
+}
+
+model life_dependant_profile {
+  id                  BigInt    @id
+  capture_date        DateTime? @db.DateTime(0)
+  company_code        String?   @db.VarChar(255)
+  date_joined         String?   @db.VarChar(255)
+  date_of_birth       String?   @db.VarChar(255)
+  email               String?   @db.VarChar(255)
+  first_name          String?   @db.VarChar(255)
+  gender              String?   @db.VarChar(255)
+  initials            String?   @db.VarChar(255)
+  is_capture_complete Boolean?  @db.Bit(1)
+  is_processed        Boolean?  @db.Bit(1)
+  last_name           String?   @db.VarChar(255)
+  member_number       String?   @db.VarChar(255)
+  mobile              String?   @db.VarChar(255)
+  msisdn              String?   @db.VarChar(255)
+  national_id         String?   @db.VarChar(255)
+  premium             Float?
+  relationship        String?   @db.VarChar(255)
+  scheme_code         String?   @db.VarChar(255)
+  scheme_name         String?   @db.VarChar(255)
+  session_id          String?   @db.VarChar(255)
+  suffix              Int?
+  title               String?   @db.VarChar(255)
+}
+
+model member_application {
+  id                            BigInt    @id @default(autoincrement())
+  application_channel           String?   @db.Char(30)
+  carrier                       String?   @db.VarChar(15)
+  first_name                    String?   @db.Char(120)
+  last_name                     String?   @db.Char(120)
+  initials                      String?   @db.Char(12)
+  title                         String?   @db.Char(12)
+  email                         String?   @default("") @db.Char(120)
+  msisdn                        String?   @db.Char(30)
+  national_id                   String?   @db.Char(50)
+  company_code                  String?   @db.Char(50)
+  date_joined                   String?   @db.Char(10)
+  date_of_birth                 String?   @db.Char(10)
+  scheme_code                   String?   @db.Char(12)
+  address_line1                 String?   @db.Char(120)
+  address_line2                 String?   @db.Char(120)
+  city                          String?   @db.Char(40)
+  nok_first_name                String?   @db.Char(120)
+  nok_last_name                 String?   @db.Char(120)
+  nok_initials                  String?   @db.Char(12)
+  nok_msisdn                    String?   @db.Char(120)
+  nok_national_id               String?   @db.Char(50)
+  nok_relationship_code         String?   @db.Char(20)
+  nok_date_of_birth             String?   @db.Char(10)
+  nok_address_line1             String?   @db.Char(160)
+  nok_address_line2             String?   @db.Char(160)
+  DateCaptured                  DateTime? @db.DateTime(0)
+  SessionId                     String?   @db.Char(40)
+  member_number                 String?   @db.Char(30)
+  date_processed                DateTime? @db.DateTime(0)
+  is_processed                  Boolean?  @db.Bit(1)
+  status_code                   String?   @db.Char(10)
+  date_captured                 DateTime? @db.DateTime(0)
+  current_dep_number            Int?
+  gender                        String?   @db.VarChar(255)
+  session_id                    String?   @db.VarChar(255)
+  agent_code                    String?   @db.VarChar(255)
+  product_name                  String?   @db.VarChar(255)
+  completeness                  Float?
+  is_rejected                   Boolean?  @db.Bit(1)
+  processed_by                  String?   @db.VarChar(255)
+  dependants_exported_indicator Boolean?  @db.Bit(1)
+  dependant_export_date         DateTime? @db.DateTime(0)
+  exported_indicator            Boolean?  @db.Bit(1)
+  export_date                   DateTime? @db.DateTime(0)
+  export_number                 Int?
+  marital_status                String?   @db.VarChar(255)
+}
+
+model member_number_control {
+  id                      BigInt    @id
+  date_generated          DateTime? @db.DateTime(0)
+  generated_member_number String?   @db.VarChar(12)
+  length                  Int?
+  padding_character       String?   @db.VarChar(1)
+  prefix                  String?   @db.VarChar(3)
+  scheme                  String?   @db.VarChar(12)
+  sequence_number         BigInt?
+}
+
+model member_relationship {
+  relationship_id Int     @id
+  relationship    String? @db.VarChar(15)
+}
+
+model member_title {
+  title_id Int     @id
+  title    String? @db.VarChar(15)
+}
+
+model payment {
+  id                 BigInt    @id @default(autoincrement())
+  active             Boolean?  @db.Bit(1)
+  date_created       DateTime? @db.DateTime(0)
+  date_modified      DateTime? @db.DateTime(0)
+  request_date       DateTime? @db.DateTime(0)
+  version            BigInt?
+  amount             Float?
+  channel            Int?
+  customer_number    String?   @db.VarChar(255)
+  mobile_number      String?   @db.VarChar(255)
+  reference          String?   @db.VarChar(255)
+  status             Int?
+  created_by         String    @db.VarChar(50)
+  created_date       DateTime? @db.DateTime(0)
+  last_modified_by   String?   @db.VarChar(50)
+  last_modified_date DateTime? @db.DateTime(0)
+  customerNumber     String?   @db.VarChar(255)
+  mobileNumber       String?   @db.VarChar(255)
+}
+
+model role {
+  id   BigInt  @id @default(autoincrement())
+  name String? @db.VarChar(255)
+}
+
+model sales_agent {
+  agent_code   String  @id @db.VarChar(255)
+  email        String? @db.VarChar(255)
+  first_name   String? @db.VarChar(255)
+  initials     String? @db.VarChar(255)
+  last_name    String? @db.VarChar(255)
+  msisdn       String? @db.VarChar(255)
+  national_id  String? @db.VarChar(255)
+  region       String? @db.VarChar(255)
+  gender       String? @db.VarChar(255)
+  suffix       Int?
+  unit         String? @db.VarChar(255)
+  dob          String? @db.Char(30)
+  Joining_Date String? @db.Char(30)
+  address      String? @db.Char(255)
+}
+
+model sms {
+  id                 BigInt    @id @default(autoincrement())
+  date_generated     DateTime? @db.DateTime(0)
+  date_sent          DateTime? @db.DateTime(0)
+  destination        String?   @db.VarChar(255)
+  message_date       String?   @db.VarChar(255)
+  message_reference  String?   @db.VarChar(255)
+  message_text       String?   @db.VarChar(255)
+  msisdn             String?   @db.VarChar(255)
+  originator         String?   @db.VarChar(255)
+  sent_indicator     Boolean?  @db.Bit(1)
+  source_application String?   @db.VarChar(255)
+  status             String?   @db.VarChar(255)
+}
+
+model sms_template {
+  template_id              BigInt   @id @default(autoincrement())
+  application_id           String?  @db.VarChar(20)
+  is_dynamic               Boolean? @db.Bit(1)
+  node                     String?  @db.VarChar(12)
+  root_module              String?  @db.VarChar(20)
+  template_text            String?  @db.VarChar(800)
+  web_service_host_address String?  @db.VarChar(20)
+  web_service_method       String?  @db.VarChar(50)
+}
+
+model system_user {
+  id             BigInt  @id @default(autoincrement())
+  application_id String? @db.VarChar(255)
+  password       String? @db.VarChar(255)
+  username       String? @db.VarChar(255)
+}
+
+model user {
+  id                 BigInt    @id @default(autoincrement())
+  created_by         String    @db.VarChar(50)
+  created_date       DateTime? @db.DateTime(0)
+  last_modified_by   String?   @db.VarChar(50)
+  last_modified_date DateTime? @db.DateTime(0)
+  version            BigInt
+  active             Boolean   @db.Bit(1)
+  date_of_birth      DateTime? @db.Date
+  device_name        String?   @db.VarChar(255)
+  email              String?   @unique(map: "UK_ob8kqyqqgmefl0aco34akdtpe") @db.VarChar(255)
+  first_name         String?   @db.VarChar(255)
+  gender             String?   @db.VarChar(255)
+  id_number          String?   @unique(map: "UK_893geq5bxk3o6gh642gh6cyic") @db.VarChar(255)
+  imei               String?   @db.VarChar(255)
+  last_name          String?   @db.VarChar(255)
+  marital_status     String?   @db.VarChar(255)
+  mobile_number      String?   @unique(map: "UK_lt2b8ocin3hdnm9q6fm4o8xnr") @db.VarChar(255)
+  otp_enabled        Boolean   @db.Bit(1)
+  physical_address   String?   @db.VarChar(255)
+  pin                String?   @db.VarChar(4)
+  title              String?   @db.VarChar(255)
+  user_name          String?   @unique(map: "UK_lqjrcobrh9jc8wpcar64q1bfh") @db.VarChar(255)
+}
+
+model user_role {
+  user_id BigInt
+  role_id BigInt
+
+  @@id([user_id, role_id])
+  @@index([role_id], map: "FKa68196081fvovjhkek5m97n3y")
+}
+
+model ussd_menu {
+  menu_id                  BigInt   @id @default(autoincrement())
+  application_id           String?  @db.VarChar(255)
+  menu_prompt              String?  @db.Char(160)
+  parent_menu_id           BigInt?
+  node                     String?  @db.VarChar(12)
+  node_root                Int?
+  node_trunk               Int?
+  node_branch              Int?
+  is_dynamic               Boolean? @db.Bit(1)
+  web_service_host_address String?  @db.VarChar(20)
+  web_service_method       String?  @db.VarChar(50)
+  header                   String?  @db.VarChar(15)
+  footer                   String?  @db.VarChar(15)
+}
+
+model ussd_session {
+  session_id                String    @id @db.VarChar(255)
+  application_id            String?   @db.VarChar(80)
+  application_name          String?   @db.VarChar(50)
+  claim_member_mobile       String?   @db.VarChar(15)
+  claim_member_number       String?   @db.VarChar(15)
+  claim_member_suffix       String?   @db.VarChar(2)
+  current_handler           String?   @db.VarChar(100)
+  current_member_name       String?   @db.VarChar(80)
+  current_node              String?   @db.VarChar(12)
+  current_payment_amount    Float?
+  current_payment_narration String?   @db.VarChar(120)
+  current_suffix            Int?
+  end_date                  DateTime? @db.DateTime(0)
+  end_reason                String?   @db.VarChar(255)
+  entity_id                 String?   @db.VarChar(15)
+  menu_id                   BigInt?
+  menu_text                 String?   @db.VarChar(180)
+  mno                       String?   @db.VarChar(15)
+  msisdn                    String    @db.VarChar(24)
+  session_active            Boolean?  @db.Bit(1)
+  session_date              DateTime? @db.DateTime(0)
+}
